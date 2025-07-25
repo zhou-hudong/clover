@@ -12,6 +12,8 @@ sqlparse = "==0.5.3"
 tzdata = "==2025.2"
 whitenoise = "*"
 gunicorn = "*"
+psycopg2-binary = "*"
+dj-database-url = "*"
 
 [dev-packages]
 
