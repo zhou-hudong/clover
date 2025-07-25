@@ -7,7 +7,7 @@ class UserRegisterForm(forms.ModelForm):
     # 用户注册表单，包含密码和是否理发师的字段
     # Modulo di registrazione utente, include password e campo per "sei un barbiere?"
     password = forms.CharField(widget=forms.PasswordInput)
-    is_barber = forms.BooleanField(required=False, label="Are you a barber?")  # 是否理发师（可选）
+    #is_barber = forms.BooleanField(required=False, label="Are you a barber?")  # 是否理发师（可选）
     # Sei un barbiere? (opzionale)
 
     class Meta:
