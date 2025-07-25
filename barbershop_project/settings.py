@@ -25,7 +25,12 @@ SECRET_KEY = 'django-insecure-o1wk5me8epxr^74%ja8lr#)*(3kt&0su5v+sf3#^_g0er!$=4a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'clover-tjb2.onrender.com',
+    'localhost',
+    '127.0.0.1',
+    os.environ.get('RENDER_EXTERNAL_HOSTNAME', ''),
+]
 
 
 # Application definition
