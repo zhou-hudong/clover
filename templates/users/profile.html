@@ -1,0 +1,54 @@
+
+
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load tz %}
+{% block content %}
+<div class="container mt-4" style="max-width: 600px;">
+  <h2 class="mb-4">My Profile</h2>
+
+  <!-- 头像展示区域 -->
+  <div class="mb-3 text-center">
+    {% if user.profile.avatar %}
+      <img src="{{ user.profile.avatar.url }}" class="rounded-circle border" width="150" height="150" alt="Avatar">
+    {% else %}
+      <img src="{% static 'css/default-avatar.png' %}" class="rounded-circle border" width="150" height="150" alt="Default Avatar">
+    {% endif %}
+  </div>
+
+  <!-- 个人资料编辑表单 -->
+  <form method="post" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+
+    <!-- 邮箱字段 -->
+    <div class="mb-3">
+      {{ form.email.label_tag }}
+      {{ form.email|add_class:"form-control" }}
+    </div>
+
+    <!-- 是否是理发师复选框
+    <div class="form-check mb-3">
+      {{ form.is_barber|add_class:"form-check-input" }}
+      {{ form.is_barber.label_tag }}
+    </div>-->
+
+    <!-- 头像上传 -->
+    <div class="mb-3">
+      {{ form.avatar.label_tag }}
+      {{ form.avatar|add_class:"form-control" }}
+    </div>
+
+    <!-- 描述字段 -->
+    <div class="mb-3">
+      {{ form.description.label_tag }}
+      {{ form.description|add_class:"form-control" }}
+    </div>
+
+    <!-- 提交按钮 -->
+    <button type="submit" class="btn btn-success">Save Changes</button>
+  </form>
+</div>
+{% endblock %}
+

@@ -1,0 +1,54 @@
+
+
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container mt-4">
+
+  <!-- 标题：根据是否是编辑/创建判断 -->
+  <!-- Titolo: cambia in base a modifica o creazione -->
+  <h2 class="mb-4">
+    {{ form.instance.pk|yesno:"Edit Service,Create Service" }}
+  </h2>
+
+  <!-- 服务表单：使用 Bootstrap 表单样式 -->
+  <!-- Form di servizio con stile Bootstrap -->
+  <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+    {% csrf_token %}
+
+    <!-- 每个字段单独渲染并加上样式 -->
+    <!-- Ogni campo reso singolarmente con classi di stile -->
+    <div class="mb-3">
+      {{ form.name.label_tag }}
+      {{ form.name|add_class:"form-control" }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.price.label_tag }}
+      {{ form.price|add_class:"form-control" }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.duration_minutes.label_tag }}
+      {{ form.duration_minutes|add_class:"form-control" }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.description.label_tag }}
+      {{ form.description|add_class:"form-control" }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.image.label_tag }}
+      {{ form.image|add_class:"form-control" }}
+    </div>
+
+    <!-- 提交按钮 -->
+    <!-- Pulsante di invio -->
+    <button type="submit" class="btn btn-success">Save</button>
+    <a href="{% url 'service-list' %}" class="btn btn-secondary ms-2">Cancel</a>
+  </form>
+
+</div>
+{% endblock %}

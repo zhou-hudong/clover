@@ -1,0 +1,126 @@
+
+<!-- pip install django-widget-tweaks 给add_class美化用的-->
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<!-- 页面主标题 -->
+<!-- Titolo principale della pagina -->
+<h2 class="mb-4">Welcome to Barbershop!</h2>
+
+<!-- 筛选表单，使用 Bootstrap 的表单布局 -->
+<!-- Modulo di filtro, utilizzo del layout form di Bootstrap -->
+<form method="get" class="row g-3 align-items-center mb-4">
+  <!-- 关键词搜索输入框 -->
+  <!-- Campo di ricerca per parola chiave -->
+  <div class="col-auto">
+    {{ filter_form.q.label_tag }}
+    {{ filter_form.q|add_class:"form-control" }}
+  </div>
+
+  <!-- 最低价格输入框 -->
+  <!-- Campo per il prezzo minimo -->
+  <div class="col-auto">
+    {{ filter_form.min_price.label_tag }}
+    {{ filter_form.min_price|add_class:"form-control" }}
+  </div>
+
+  <!-- 最高价格输入框 -->
+  <!-- Campo per il prezzo massimo -->
+  <div class="col-auto">
+    {{ filter_form.max_price.label_tag }}
+    {{ filter_form.max_price|add_class:"form-control" }}
+  </div>
+
+  <!-- 时长筛选输入框 -->
+  <!-- Campo per la durata -->
+  <div class="col-auto">
+    {{ filter_form.duration_minutes.label_tag }}
+    {{ filter_form.duration_minutes|add_class:"form-control" }}
+  </div>
+
+  <!-- 提交按钮 -->
+  <!-- Pulsante di invio -->
+  <div class="col-auto">
+    <button type="submit" class="btn btn-primary">Filter</button>
+  </div>
+
+  <!-- 重置链接 -->
+  <!-- Link per resettare -->
+  <div class="col-auto">
+    <a href="{% url 'home' %}" class="btn btn-secondary">Reset</a>
+  </div>
+</form>
+
+<hr>
+
+<!-- 服务列表 -->
+<!-- Lista dei servizi -->
+<ul class="list-unstyled">
+  {% for service in services %}
+    <li class="mb-4 p-3 border rounded shadow-sm d-flex align-items-center">
+
+      <!-- 服务图片：如果有则显示 -->
+      <!-- Immagine del servizio: mostra se disponibile -->
+      {% if service.image %}
+      <div class="me-3 flex-shrink-0">
+        <img src="{{ service.image.url }}" width="150" class="rounded" alt="Service image for {{ service.name }}">
+      </div>
+      {% endif %}
+
+      <!-- 服务信息 -->
+      <!-- Informazioni sul servizio -->
+      <div>
+        <strong class="fs-5">{{ service.name }}</strong> — <span class="text-success">{{ service.price }} €</span><br>
+        <small class="text-muted">Duration: {{ service.duration|cut:":00" }}</small>
+
+        <p class="mt-2 mb-0">{{ service.description }}</p>
+      </div>
+    </li>
+  {% empty %}
+    <!-- 当前无服务 -->
+    <!-- Nessun servizio disponibile al momento -->
+    <li class="text-muted">No services available at the moment.</li>
+  {% endfor %}
+</ul>
+
+<!-- 分页导航 -->
+<!-- Navigazione della paginazione -->
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+    {% if services.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ services.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.min_price %}&min_price={{ request.GET.min_price }}{% endif %}{% if request.GET.max_price %}&max_price={{ request.GET.max_price }}{% endif %}{% if request.GET.duration_minutes %}&duration_minutes={{ request.GET.duration_minutes }}{% endif %}" aria-label="Previous">
+          <span aria-hidden="true">&laquo; Previous</span>
+        </a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">&laquo; Previous</span>
+      </li>
+    {% endif %}
+
+    <li class="page-item disabled">
+      <span class="page-link">
+        <!-- 当前页 -->
+        <!-- Pagina corrente -->
+        Page {{ services.number }} of {{ services.paginator.num_pages }}
+      </span>
+    </li>
+
+    {% if services.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ services.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.min_price %}&min_price={{ request.GET.min_price }}{% endif %}{% if request.GET.max_price %}&max_price={{ request.GET.max_price }}{% endif %}{% if request.GET.duration_minutes %}&duration_minutes={{ request.GET.duration_minutes }}{% endif %}" aria-label="Next">
+          <span aria-hidden="true">Next &raquo;</span>
+        </a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">Next &raquo;</span>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+
+{% endblock %}

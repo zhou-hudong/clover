@@ -1,0 +1,31 @@
+
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container mt-5" style="max-width: 400px;">
+  <!-- 注册标题 -->
+  <h2 class="mb-4 text-center">Register</h2>
+
+  <!-- 注册表单 -->
+  <form method="POST" novalidate>
+    {% csrf_token %}
+    <!-- 使用Bootstrap表单样式包裹每个字段 -->
+    {% for field in form %}
+      <div class="mb-3">
+        {{ field.label_tag }}
+        {{ field|add_class:"form-control" }}
+        <!-- 显示字段错误 -->
+        {% if field.errors %}
+          <div class="text-danger small mt-1">
+            {{ field.errors|striptags }}
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+
+    <!-- 提交按钮 -->
+    <button type="submit" class="btn btn-primary w-100">Register</button>
+  </form>
+</div>
+{% endblock %}

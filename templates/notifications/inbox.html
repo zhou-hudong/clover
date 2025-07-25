@@ -1,0 +1,93 @@
+
+
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<!-- 页面标题 -->
+<!-- Titolo della pagina -->
+<h2>Inbox</h2>
+
+<!-- 判断是否有通知 -->
+<!-- Controlla se ci sono notifiche -->
+{% if page_obj.object_list %}
+  <!-- 使用Bootstrap列表组展示通知 -->
+  <!-- Mostra le notifiche in una lista Bootstrap -->
+  <ul class="list-group mb-3">
+    {% for notification in page_obj.object_list %}
+      <!-- 未读通知字体加粗 -->
+      <!-- Notifiche non lette in grassetto -->
+      <li class="list-group-item d-flex justify-content-between align-items-center
+          {% if not notification.is_read %} fw-bold {% endif %}">
+
+        <!-- 通知内容 -->
+        <!-- Contenuto della notifica -->
+        <div>
+          {{ notification.message }} <br>
+          <!-- 显示创建时间，格式化显示 -->
+          <!-- Mostra la data di creazione formattata -->
+          <small class="text-muted">{{ notification.created_at|date:"Y-m-d H:i" }}</small>
+        </div>
+
+        <!-- 如果未读，显示标记已读按钮 -->
+        <!-- Se non letta, mostra il pulsante per segnare come letta -->
+        {% if not notification.is_read %}
+          <form method="post" action="{% url 'notification-read' notification.pk %}" class="mb-0">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-sm btn-outline-primary">Mark as read</button>
+          </form>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+
+  <!-- 分页导航 -->
+  <!-- Navigazione pagine -->
+  <nav aria-label="Notification pagination">
+    <ul class="pagination justify-content-center">
+      <!-- 上一页按钮 -->
+      <!-- Pulsante pagina precedente -->
+      {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+            &laquo; Previous
+          </a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">&laquo; Previous</span>
+        </li>
+      {% endif %}
+
+      <!-- 当前页数 -->
+      <!-- Numero pagina corrente -->
+      <li class="page-item disabled">
+        <span class="page-link">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+      </li>
+
+      <!-- 下一页按钮 -->
+      <!-- Pulsante pagina successiva -->
+      {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+            Next &raquo;
+          </a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">Next &raquo;</span>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+
+{% else %}
+  <!-- 无通知提示 -->
+  <!-- Nessuna notifica -->
+  <p class="text-center text-muted">No notifications yet.</p>
+{% endif %}
+
+{% endblock %}

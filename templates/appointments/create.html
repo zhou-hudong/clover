@@ -1,0 +1,33 @@
+
+
+
+
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- 页面标题 -->
+<!-- Titolo della pagina -->
+<h2 class="mb-4">Add an Appointment</h2>
+
+<!-- 预约添加表单 -->
+<!-- Form per aggiungere un appuntamento -->
+<form method="post" class="mb-3">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <!-- 使用Bootstrap按钮样式 -->
+    <!-- Usa lo stile del pulsante Bootstrap -->
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
+
+<!-- 错误或提示消息显示 -->
+<!-- Visualizzazione di messaggi di errore o avviso -->
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-danger" role="alert">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+
+{% endblock %}
+

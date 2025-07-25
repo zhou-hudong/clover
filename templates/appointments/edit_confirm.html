@@ -1,0 +1,24 @@
+
+
+
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- 页面标题 -->
+<!-- Titolo della pagina -->
+<h2 class="mb-4">Appointment Updated</h2>
+
+<!-- 更新成功提示 -->
+<!-- Messaggio di conferma aggiornamento appuntamento -->
+<p>Your appointment for
+  <strong>{{ appt.service.name }}</strong><br>
+  on {{ appt.date }} at {{ appt.time }} has been updated.
+</p>
+
+<!-- 返回预约列表按钮 -->
+<!-- Pulsante per tornare alla lista degli appuntamenti -->
+<form action="{% url 'appointment-list' %}">
+  <button type="submit" class="btn btn-primary">OK</button>
+</form>
+
+{% endblock %}

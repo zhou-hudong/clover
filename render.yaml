@@ -1,0 +1,17 @@
+
+
+services:
+  - type: web
+    name: my-barbershop
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn barbershop_project.wsgi
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: barbershop_project.settings
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: "your-app-name.onrender.com"

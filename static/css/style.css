@@ -1,0 +1,86 @@
+
+
+/* 全局设置 */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* 标题统一样式 */
+h1, h2, h3 {
+    color: #343a40;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+/* 卡片样式（服务、通知等） */
+.card {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* 图片缩放圆角 */
+.card img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+/* 表单样式 */
+.filter-form input,
+.filter-form select,
+.filter-form button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.filter-form button {
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+
+/* 通知未读项加高亮 */
+.notification-unread {
+    font-weight: bold;
+    background-color: #e7f3ff;
+    padding: 10px;
+    border-left: 4px solid #0d6efd;
+    border-radius: 8px;
+}
+
+/* 分页样式 */
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.pagination a {
+    padding: 6px 12px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #0d6efd;
+    transition: all 0.2s ease;
+}
+
+.pagination a:hover {
+    background-color: #0d6efd;
+    color: #fff;
+}
+
+/* 按钮统一样式（可选） */
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    border-radius: 8px;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}

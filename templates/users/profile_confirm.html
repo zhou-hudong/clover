@@ -1,0 +1,17 @@
+
+
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container mt-5" style="max-width: 500px; text-align: center;">
+  <!-- 标题，显示被更新的字段 -->
+  <h2 class="mb-4 text-success">{{ field }} Updated</h2>
+
+  <!-- 成功提示 -->
+  <p class="lead">Your profile has been successfully updated.</p>
+
+  <!-- 返回个人资料页按钮 -->
+  <a href="{% url 'profile' %}" class="btn btn-primary mt-3">Back to Profile</a>
+</div>
+{% endblock %}

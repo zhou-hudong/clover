@@ -1,0 +1,49 @@
+
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container mt-5" style="max-width: 400px;">
+  <h2 class="mb-4 text-center">Login</h2>
+
+  <!-- 登录表单 -->
+  <form method="post" novalidate>
+    {% csrf_token %}
+    <!-- 用户名输入 -->
+    <div class="mb-3">
+      <label for="username" class="form-label">Username:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        name="username"
+        required
+        placeholder="Enter your username"
+      >
+    </div>
+
+    <!-- 密码输入 -->
+    <div class="mb-3">
+      <label for="password" class="form-label">Password:</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        required
+        placeholder="Enter your password"
+      >
+    </div>
+
+    <!-- 登录按钮 -->
+    <button type="submit" class="btn btn-primary w-100">Login</button>
+  </form>
+
+  <!-- 错误提示 -->
+  {% if error %}
+  <div class="alert alert-danger mt-3" role="alert">
+    {{ error }}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

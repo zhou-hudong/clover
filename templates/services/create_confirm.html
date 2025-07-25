@@ -1,0 +1,33 @@
+
+
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container mt-4">
+
+  <!-- 成功提示框 -->
+  <!-- Box di successo -->
+  <div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">Service created successfully!</h4>
+    <p>
+      <strong>{{ service.name }}</strong> - {{ service.price }} €
+    </p>
+    <hr>
+    <p class="mb-0">{{ service.description }}</p>
+
+    {% if service.image %}
+      <!-- 显示服务图片 -->
+      <!-- Mostra immagine del servizio -->
+      <div class="mt-3">
+        <img src="{{ service.image.url }}" alt="Service Image" class="img-thumbnail" style="max-width: 200px;">
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- 返回按钮 -->
+  <!-- Bottone per tornare alla lista servizi -->
+  <a href="{% url 'service-list' %}" class="btn btn-primary">Back to My Services</a>
+
+</div>
+{% endblock %}

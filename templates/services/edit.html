@@ -1,0 +1,46 @@
+
+
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container mt-4">
+
+  <!-- 动态标题：创建或编辑 -->
+  <!-- Titolo dinamico: modifica o creazione -->
+  <h2 class="mb-4">
+    {{ form.instance.pk|yesno:"Edit Service,Create Service" }}
+  </h2>
+
+  <!-- 表单卡片 -->
+  <!-- Card del form -->
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- 使用 widget_tweaks 美化表单字段 -->
+        <!-- Migliora i campi del form con widget_tweaks -->
+        {% for field in form %}
+          <div class="mb-3">
+            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+            {{ field|add_class:"form-control" }}
+            {% if field.help_text %}
+              <div class="form-text">{{ field.help_text }}</div>
+            {% endif %}
+            {% for error in field.errors %}
+              <div class="text-danger small">{{ error }}</div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+
+        <!-- 提交按钮 -->
+        <!-- Pulsante di invio -->
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="{% url 'service-list' %}" class="btn btn-secondary ms-2">Cancel</a>
+      </form>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

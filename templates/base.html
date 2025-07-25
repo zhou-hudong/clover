@@ -1,0 +1,108 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Barbershop</title>
+    {% load widget_tweaks %}
+    {% load static %}
+
+    <!-- Bootstrap CSS (importazione ufficiale da CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- 自定义样式文件 -->
+    <!-- File di stile personalizzato -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<!-- 导航栏（顶部菜单） -->
+<!-- Barra di navigazione (menu superiore) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+  <div class="container">
+    <!-- 网站标题按钮：跳转首页 -->
+    <!-- Pulsante titolo sito: reindirizza alla homepage -->
+    <a class="navbar-brand" href="{% url 'home' %}">Clover Barbershop</a>
+
+    <!-- Bootstrap 折叠按钮（移动端展开菜单用） -->
+    <!-- Bottone collapse di Bootstrap (per espandere il menu su dispositivi mobili) -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- 折叠菜单项部分，使用 ID 与按钮绑定 -->
+    <!-- Parte del menu a scomparsa, associata al bottone tramite ID -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- 左侧菜单（动态内容） -->
+      <!-- Menu a sinistra (contenuti dinamici) -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if user.is_authenticated %}
+            {% if user.profile and user.profile.is_barber %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'service-list' %}">My Services</a>
+                </li>
+            {% endif %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'appointment-list' %}">My Appointments</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'profile' %}">My Profile</a>
+            </li>
+
+            <li class="nav-item">
+              <!-- 通知按钮（带红点徽章） -->
+              <!-- Pulsante notifiche (con badge rosso) -->
+              <a class="nav-link position-relative" href="{% url 'notification-list' %}">
+                Notifications
+                {% if unread_notification_count > 0 %}
+                  <span class="badge bg-danger position-absolute top-0 start-100 translate-middle">
+                    {{ unread_notification_count }}
+                    <span class="visually-hidden">unread notifications</span>
+                  </span>
+                {% endif %}
+              </a>
+            </li>
+
+        {% endif %}
+      </ul>
+
+      <!-- 右侧菜单：登录 / 登出 -->
+      <!-- Menu a destra: login / logout -->
+      <ul class="navbar-nav ms-auto">
+        {% if user.is_authenticated %}
+          <li class="nav-item d-flex align-items-center">
+            <span class="me-2">Hi, {{ user.username }}!</span>
+            <form action="{% url 'logout' %}" method="post" class="d-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-secondary btn-sm">Logout</button>
+            </form>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- 页面主区域，供子模板插入内容 -->
+<!-- Area principale della pagina, per il contenuto dei template figli -->
+<div class="container">
+  {% block content %}
+  {% endblock %}
+</div>
+
+<!-- Bootstrap 所需 JS 文件（来自 CDN） -->
+<!-- File JS necessari di Bootstrap (da CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<!-- 标题 -->
+<!-- Titolo -->
+<h2 class="mb-4">Available Services</h2>
+
+<!-- 筛选表单 -->
+<!-- Form di filtro -->
+<form method="get" class="row g-3 mb-4">
+  <div class="col-md-3">
+    <!-- 搜索框标签 -->
+    <!-- Etichetta campo di ricerca -->
+    {{ filter_form.q.label_tag }}
+    <!-- 搜索框输入 -->
+    <!-- Campo di input ricerca -->
+    {{ filter_form.q|add_class:"form-control" }}
+  </div>
+  <div class="col-md-2">
+    {{ filter_form.min_price.label_tag }}
+    {{ filter_form.min_price|add_class:"form-control" }}
+  </div>
+  <div class="col-md-2">
+    {{ filter_form.max_price.label_tag }}
+    {{ filter_form.max_price|add_class:"form-control" }}
+  </div>
+  <div class="col-md-2">
+    {{ filter_form.duration_minutes.label_tag }}
+    {{ filter_form.duration_minutes|add_class:"form-control" }}
+  </div>
+  <div class="col-md-3 d-flex align-items-end">
+    <!-- 筛选按钮 -->
+    <!-- Pulsante filtra -->
+    <button type="submit" class="btn btn-primary me-2">Filter</button>
+    <!-- 重置按钮 -->
+    <!-- Pulsante reset -->
+    <a href="{% url 'service-list' %}" class="btn btn-secondary">Reset</a>
+  </div>
+</form>
+
+<!-- 创建新服务按钮，仅理发师可见 -->
+<!-- Pulsante crea nuovo servizio, visibile solo ai barbieri -->
+{% if user.is_authenticated and user.profile.is_barber %}
+  <div class="mb-3">
+    <a href="{% url 'service-create' %}" class="btn btn-success">+ Create New Service</a>
+  </div>
+{% endif %}
+
+<!-- 服务列表 -->
+<!-- Lista servizi -->
+<div class="row">
+  {% for service in page_obj %}
+    <div class="col-md-6 mb-4">
+      <div class="card h-100">
+        {% if service.image %}
+          <!-- Immagine del servizio -->
+          <img src="{{ service.image.url }}" class="card-img-top" style="max-height: 200px; object-fit: cover;">
+        {% endif %}
+        <div class="card-body">
+          <!-- Nome e prezzo del servizio -->
+          <h5 class="card-title">{{ service.name }} - {{ service.price }} €</h5>
+          <!-- Durata del servizio -->
+          <h6 class="card-subtitle mb-2 text-muted">Duration: {{ service.duration|cut:":00" }}</h6>
+          <!-- Descrizione del servizio -->
+          <p class="card-text">{{ service.description }}</p>
+
+          <!-- 编辑和删除按钮，仅服务创建者可见 -->
+          <!-- Pulsanti modifica e elimina, visibili solo al creatore -->
+          {% if user.is_authenticated and user == service.created_by %}
+            <a href="{% url 'service-edit' service.pk %}" class="btn btn-outline-primary btn-sm">Edit</a>
+            <a href="{% url 'service-delete' service.pk %}" class="btn btn-outline-danger btn-sm ms-2">Delete</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <!-- 无服务时提示 -->
+    <!-- Nessun servizio disponibile -->
+    <p>No services available.</p>
+  {% endfor %}
+</div>
+
+<!-- 分页控件 -->
+<!-- Paginazione -->
+<div class="d-flex justify-content-center mt-4">
+  <nav>
+    <ul class="pagination">
+      {% if page_obj.has_previous %}
+        <li class="page-item">
+          <!-- 上一页 -->
+          <!-- Pagina precedente -->
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}">«</a>
+        </li>
+      {% endif %}
+
+      <li class="page-item disabled">
+        <!-- 当前页数 -->
+        <!-- Pagina corrente -->
+        <span class="page-link">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+      </li>
+
+      {% if page_obj.has_next %}
+        <li class="page-item">
+          <!-- 下一页 -->
+          <!-- Pagina successiva -->
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}">»</a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,60 @@
+
+
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<!-- 标题 -->
+<!-- Titolo -->
+<h2 class="mb-4 text-danger">Time Slot Unavailable</h2>
+
+<!-- 理发师忙碌提示 -->
+<!-- Avviso che il barbiere è occupato -->
+<p>
+  The barber <strong>{{ barber.username }}</strong> is not free at that time.<br>
+  Here are the next available slots you can choose:
+</p>
+
+<!-- 建议时间列表 -->
+<!-- Lista dei prossimi orari disponibili consigliati -->
+<ul class="list-group mb-4">
+  {% for d, t in suggestions %}
+    <li class="list-group-item">
+      {{ d|date:"Y-m-d" }} at {{ t|time:"H:i" }}
+    </li>
+  {% empty %}
+    <li class="list-group-item text-muted">No available slots in the next few days.</li>
+  {% endfor %}
+</ul>
+
+<!-- 重新提交表单 -->
+<!-- Modifica la data e l'orario e riprova -->
+<p>Please modify the date and time below and try again:</p>
+
+<form method="post" class="border p-4 rounded bg-light">
+  {% csrf_token %}
+
+  <!-- 遍历表单字段并使用 Bootstrap 类美化 -->
+  <!-- Ciclo attraverso i campi del form e applico classi Bootstrap -->
+  {% for field in form %}
+    <div class="mb-3">
+      {{ field.label_tag }}
+      {% render_field field class="form-control" %}
+      {% if field.help_text %}
+        <small class="form-text text-muted">{{ field.help_text }}</small>
+      {% endif %}
+      {% for error in field.errors %}
+        <div class="text-danger">{{ error }}</div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+
+  <!-- 提交按钮 -->
+  <!-- Pulsante di invio -->
+  <button type="submit" class="btn btn-primary">Add</button>
+</form>
+
+{% endblock %}
+
+

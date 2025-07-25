@@ -1,0 +1,40 @@
+
+
+
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container mt-4">
+
+  <!-- 成功提示标题 -->
+  <!-- Titolo messaggio di successo -->
+  <div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">Service updated successfully!</h4>
+  </div>
+
+  <!-- 卡片展示服务信息 -->
+  <!-- Scheda con informazioni sul servizio -->
+  <div class="card mb-4" style="max-width: 600px;">
+    <div class="row g-0">
+      {% if service.image %}
+        <div class="col-md-4">
+          <img src="{{ service.image.url }}" class="img-fluid rounded-start" alt="Service image">
+        </div>
+      {% endif %}
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ service.name }}</h5>
+          <p class="card-text"><strong>Price:</strong> {{ service.price }} €</p>
+          <p class="card-text">{{ service.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 返回按钮 -->
+  <!-- Pulsante per tornare alla lista servizi -->
+  <a href="{% url 'service-list' %}" class="btn btn-primary">← Back to My Services</a>
+
+</div>
+{% endblock %}

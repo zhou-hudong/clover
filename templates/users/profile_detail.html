@@ -1,0 +1,34 @@
+
+
+
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+<div class="container mt-4" style="max-width: 600px;">
+  <!-- 用户名标题 -->
+  <h2 class="mb-4">{{ profile_user.username }}’s Profile</h2>
+
+  <!-- 头像显示，带缓存刷新时间戳 -->
+  <div class="mb-3 text-center">
+    {% if profile.avatar %}
+      <img src="{{ profile.avatar.url }}?{% now 'U' %}" class="rounded-circle border" width="150" height="150" alt="Avatar">
+    {% else %}
+      <img src="{% static 'css/default-avatar.png' %}" class="rounded-circle border" width="150" height="150" alt="Default Avatar">
+    {% endif %}
+  </div>
+
+  <!-- 邮箱 -->
+  <p><strong>Email:</strong> {{ profile_user.email }}</p>
+
+  <!-- 描述，换行保留 -->
+  <p><strong>Description:</strong><br>{{ profile.description|linebreaksbr }}</p>
+
+  <!-- 用户角色显示 -->
+  <p><strong>Role:</strong> {{ profile.is_barber|yesno:"Barber,Customer" }}</p>
+
+  <!-- 返回预约列表链接 -->
+  <a href="{% url 'appointment-list' %}" class="btn btn-secondary mt-3">Back to Appointments</a>
+</div>
+{% endblock %}

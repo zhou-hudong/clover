@@ -1,0 +1,24 @@
+
+
+
+
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- 页面标题 -->
+<!-- Titolo della pagina -->
+<h2 class="mb-4 text-danger">Appointment Cancelled</h2>
+
+<!-- 取消成功提示 -->
+<!-- Messaggio di conferma cancellazione -->
+<p>Your appointment has been successfully cancelled.</p>
+
+<!-- 返回预约列表按钮，Bootstrap样式 -->
+<!-- Pulsante per tornare alla lista degli appuntamenti, stile Bootstrap -->
+<form action="{% url 'appointment-list' %}">
+  <button type="submit" class="btn btn-outline-danger">OK</button>
+</form>
+
+{% endblock %}
+
+

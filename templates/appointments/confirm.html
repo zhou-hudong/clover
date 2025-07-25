@@ -1,0 +1,23 @@
+
+
+
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- 页面标题 -->
+<!-- Titolo della pagina -->
+<h2 class="mb-4">Appointment Confirmed</h2>
+
+<!-- 预约确认信息 -->
+<!-- Informazioni di conferma appuntamento -->
+<p>Your appointment for <strong>{{ appt.service.name }}</strong>
+   on {{ appt.date }} at {{ appt.time }} has been added.</p>
+
+<!-- 返回首页按钮，使用Bootstrap按钮样式 -->
+<!-- Pulsante per tornare alla homepage, stile Bootstrap -->
+<form action="{% url 'home' %}">
+  <button type="submit" class="btn btn-success">OK</button>
+</form>
+
+{% endblock %}
+
