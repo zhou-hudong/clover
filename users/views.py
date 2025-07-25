@@ -17,7 +17,7 @@ def register(request):
             password = form.cleaned_data['password']
             user.set_password(password)  # 加密密码 / Imposta la password (criptata)
             user.save()
-            is_barber = form.cleaned_data['is_barber']  # 是否理发师字段 / Campo "È un barbiere"
+            is_barber = form.cleaned_data['is_barber', False]  # 是否理发师字段 / Campo "È un barbiere"
             Profile.objects.create(user=user, is_barber=is_barber)  # 创建用户档案 / Crea il profilo utente
             login(request, user)  # 注册后自动登录 / Login automatico dopo la registrazione
             return redirect('home')  # 跳转主页 / Reindirizza alla home page
