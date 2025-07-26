@@ -35,7 +35,7 @@
         {% if not notification.is_read %}
           <form method="post" action="{% url 'notification-read' notification.pk %}" class="mb-0">
             {% csrf_token %}
-            <button type="submit" class="btn btn-sm btn-outline-primary">Mark as read</button>
+            <button type="submit" class="btn btn-sm btn-outline-primary">Segna come letto</button>
           </form>
         {% endif %}
       </li>
@@ -87,7 +87,7 @@
 {% else %}
   <!-- 无通知提示 -->
   <!-- Nessuna notifica -->
-  <p class="text-center text-muted">No notifications yet.</p>
+  <p class="text-center text-muted">Nessuna notifica.</p>
 {% endif %}
 
 {% endblock %}

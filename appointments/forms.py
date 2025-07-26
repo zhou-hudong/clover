@@ -28,13 +28,18 @@ class AppointmentForm(forms.ModelForm):
     barber = forms.ModelChoiceField(
         queryset=User.objects.none(),  # 初始空
         required=False,
-        empty_label="(Randomly Assigned)",
-        label="Preferred Barber (optional)"
+        empty_label="(Assegnato casualmente)",
+        label="Seleziona il personale (facoltativo)"
     )
 
     class Meta:
         model = Appointment
         fields = ['service', 'date', 'time', 'barber']
+        labels = {
+            'service': 'Servizio',
+            'date': 'Data',
+            'time': 'Orario',
+        }
 
     def __init__(self, *args, **kwargs):
         # 提取传入的 user 对象
@@ -69,7 +74,7 @@ class AppointmentForm(forms.ModelForm):
         # 禁止预约当天的已过时间段
         # Non permette di prenotare orari passati nella giornata odierna
         if appt_date == date.today() and appt_time < datetime.now().time():
-            self.add_error('time', 'Cannot add for a past time today.')
+            self.add_error('time', 'Non è possibile aggiungere un orario passato oggi.')
 
         return cleaned
 

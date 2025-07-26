@@ -16,12 +16,12 @@ class UserRegisterForm(forms.ModelForm):
         # Campi richiesti per la registrazione
 
 class ProfileForm(forms.ModelForm):
-    email = forms.EmailField(required=True, label="Email Address")
-    is_barber = forms.BooleanField(required=False, label="I am a Barber")
-    avatar = forms.ImageField(required=False, label="Avatar")
+    email = forms.EmailField(required=True, label="Indirizzo Email")
+    is_barber = forms.BooleanField(required=False, label="Sono un Personale")
+    avatar = forms.ImageField(required=False, label="Immagine")
     description = forms.CharField(widget=forms.Textarea(attrs={'rows':4}),
                                   required=False,
-                                  label="Description")
+                                  label="Descrizione")
 
     class Meta:
         model = Profile

@@ -10,7 +10,7 @@
   {% if action == 'confirm' %}
     <!-- 删除确认标题 -->
     <!-- Titolo conferma cancellazione -->
-    <h2 class="text-danger mb-4">Are you sure you want to delete this service?</h2>
+    <h2 class="text-danger mb-4">Sei sicuro di cancellare questo servizio?</h2>
 
     <!-- 服务基本信息 -->
     <!-- Informazioni base sul servizio -->
@@ -22,15 +22,15 @@
     <!-- Form di conferma cancellazione -->
     <form method="post" class="d-flex gap-3">
       {% csrf_token %}
-      <button type="submit" class="btn btn-danger">Yes, Delete</button>
-      <a href="{% url 'service-list' %}" class="btn btn-secondary">Cancel</a>
+      <button type="submit" class="btn btn-danger">Si, Cancella</button>
+      <a href="{% url 'service-list' %}" class="btn btn-secondary">Cancella</a>
     </form>
 
   {% else %}
     <!-- 删除成功提示 -->
     <!-- Messaggio di successo cancellazione -->
     <div class="alert alert-success" role="alert">
-      <h4 class="alert-heading">Service deleted successfully!</h4>
+      <h4 class="alert-heading">Servizio cancellato con successo!</h4>
       <p><strong>{{ service.name }}</strong> has been removed.</p>
       <hr>
       <a href="{% url 'service-list' %}" class="btn btn-primary">Back to My Services</a>

@@ -7,13 +7,13 @@
 
 <!-- 标题 -->
 <!-- Titolo -->
-<h2 class="mb-4 text-danger">Time Slot Unavailable</h2>
+<h2 class="mb-4 text-danger">Fascia oraria non disponibile</h2>
 
 <!-- 理发师忙碌提示 -->
 <!-- Avviso che il barbiere è occupato -->
 <p>
-  The barber <strong>{{ barber.username }}</strong> is not free at that time.<br>
-  Here are the next available slots you can choose:
+  Il barbiere <strong>{{ barber.username }}</strong> non è disponibile al momento.<br>
+  Ecco i prossimi posti disponibili tra cui puoi scegliere:
 </p>
 
 <!-- 建议时间列表 -->
@@ -24,13 +24,13 @@
       {{ d|date:"Y-m-d" }} at {{ t|time:"H:i" }}
     </li>
   {% empty %}
-    <li class="list-group-item text-muted">No available slots in the next few days.</li>
+    <li class="list-group-item text-muted">Nessuno slot disponibile nei prossimi giorni.</li>
   {% endfor %}
 </ul>
 
 <!-- 重新提交表单 -->
 <!-- Modifica la data e l'orario e riprova -->
-<p>Please modify the date and time below and try again:</p>
+<p>Modifica la data e l'ora qui sotto e riprova:</p>
 
 <form method="post" class="border p-4 rounded bg-light">
   {% csrf_token %}
@@ -52,7 +52,7 @@
 
   <!-- 提交按钮 -->
   <!-- Pulsante di invio -->
-  <button type="submit" class="btn btn-primary">Add</button>
+  <button type="submit" class="btn btn-primary">Aggiungi</button>
 </form>
 
 {% endblock %}

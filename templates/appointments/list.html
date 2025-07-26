@@ -5,14 +5,14 @@
 
 <!-- 页面标题，显示选中日期 -->
 <!-- Titolo della pagina, mostra la data selezionata -->
-<h2 class="mb-4">Appointments for {{ selected_date }}</h2>
+<h2 class="mb-4">Appuntamenti per {{ selected_date }}</h2>
 
 <!-- 日期选择表单，GET请求 -->
 <!-- Form di selezione data, metodo GET -->
 <form method="get" class="mb-4 d-flex align-items-center gap-2">
-    <label for="date" class="form-label mb-0">Select Date:</label>
+    <label for="date" class="form-label mb-0">Seleziona data:</label>
     <input type="date" id="date" name="date" value="{{ selected_date }}" class="form-control" style="max-width: 200px;">
-    <button type="submit" class="btn btn-primary">Filter</button>
+    <button type="submit" class="btn btn-primary">Filtra</button>
 </form>
 
 <!-- 预约列表 -->
@@ -20,25 +20,25 @@
 {% for appt in page_obj %}
   <div class="card mb-3 p-3 shadow-sm">
     <h5 class="card-title">{{ appt.service.name }}</h5>
-    <p class="mb-1"><strong>Time:</strong> {{ appt.time }}</p>
+    <p class="mb-1"><strong>Tempo:</strong> {{ appt.time }}</p>
 
     {% if user.profile.is_barber %}
       <!-- 理发师视角，显示客户信息 -->
       <!-- Vista del barbiere, mostra informazioni cliente -->
       <p class="mb-1"><strong>Client:</strong> {{ appt.client.username }}</p>
-      <a href="{% url 'profile-detail' appt.client.id %}" class="btn btn-sm btn-outline-secondary mb-2">View Profile</a>
+      <a href="{% url 'profile-detail' appt.client.id %}" class="btn btn-sm btn-outline-secondary mb-2">Visualizza profilo</a>
     {% else %}
       <!-- 客户视角，显示理发师信息和编辑/取消操作 -->
       <!-- Vista del cliente, mostra informazioni barbiere ed opzioni modifica/cancellazione -->
-      <p class="mb-1"><strong>Barber:</strong> {{ appt.barber.username }}</p>
-      <a href="{% url 'appointment-edit' appt.pk %}" class="btn btn-sm btn-warning me-2">Edit</a>
-      <a href="{% url 'appointment-delete' appt.pk %}" class="btn btn-sm btn-danger">Cancel</a>
+      <p class="mb-1"><strong>Personale:</strong> {{ appt.barber.username }}</p>
+      <a href="{% url 'appointment-edit' appt.pk %}" class="btn btn-sm btn-warning me-2">Modifica</a>
+      <a href="{% url 'appointment-delete' appt.pk %}" class="btn btn-sm btn-danger">Cancella</a>
     {% endif %}
   </div>
 {% empty %}
   <!-- 无预约提示 -->
   <!-- Nessun appuntamento per questa data -->
-  <p class="text-muted">No appointments on this date.</p>
+  <p class="text-muted">Nessun appuntamento in questa data.</p>
 {% endfor %}
 
 <!-- 分页导航 -->
@@ -75,7 +75,7 @@
 <!-- Link per aggiungere nuovo appuntamento, visibile solo ai clienti -->
 {% if not user.profile.is_barber %}
   <p class="mt-4">
-    <a href="{% url 'appointment-create' %}" class="btn btn-success">+ Add New Appointment</a>
+    <a href="{% url 'appointment-create' %}" class="btn btn-success">+ Aggiungi un nuovo Appuntamento</a>
   </p>
 {% endif %}
 

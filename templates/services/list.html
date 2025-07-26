@@ -6,7 +6,7 @@
 
 <!-- 标题 -->
 <!-- Titolo -->
-<h2 class="mb-4">Available Services</h2>
+<h2 class="mb-4">Servizi disponibili</h2>
 
 <!-- 筛选表单 -->
 <!-- Form di filtro -->
@@ -34,7 +34,7 @@
   <div class="col-md-3 d-flex align-items-end">
     <!-- 筛选按钮 -->
     <!-- Pulsante filtra -->
-    <button type="submit" class="btn btn-primary me-2">Filter</button>
+    <button type="submit" class="btn btn-primary me-2">Filtra</button>
     <!-- 重置按钮 -->
     <!-- Pulsante reset -->
     <a href="{% url 'service-list' %}" class="btn btn-secondary">Reset</a>
@@ -45,7 +45,7 @@
 <!-- Pulsante crea nuovo servizio, visibile solo ai barbieri -->
 {% if user.is_authenticated and user.profile.is_barber %}
   <div class="mb-3">
-    <a href="{% url 'service-create' %}" class="btn btn-success">+ Create New Service</a>
+    <a href="{% url 'service-create' %}" class="btn btn-success">+ Aggiungi un nuovo Servizio</a>
   </div>
 {% endif %}
 
@@ -63,15 +63,15 @@
           <!-- Nome e prezzo del servizio -->
           <h5 class="card-title">{{ service.name }} - {{ service.price }} €</h5>
           <!-- Durata del servizio -->
-          <h6 class="card-subtitle mb-2 text-muted">Duration: {{ service.duration|cut:":00" }}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">Durata: {{ service.duration|cut:":00" }}</h6>
           <!-- Descrizione del servizio -->
           <p class="card-text">{{ service.description }}</p>
 
           <!-- 编辑和删除按钮，仅服务创建者可见 -->
           <!-- Pulsanti modifica e elimina, visibili solo al creatore -->
           {% if user.is_authenticated and user == service.created_by %}
-            <a href="{% url 'service-edit' service.pk %}" class="btn btn-outline-primary btn-sm">Edit</a>
-            <a href="{% url 'service-delete' service.pk %}" class="btn btn-outline-danger btn-sm ms-2">Delete</a>
+            <a href="{% url 'service-edit' service.pk %}" class="btn btn-outline-primary btn-sm">Modifica</a>
+            <a href="{% url 'service-delete' service.pk %}" class="btn btn-outline-danger btn-sm ms-2">Cancella</a>
           {% endif %}
         </div>
       </div>
@@ -79,7 +79,7 @@
   {% empty %}
     <!-- 无服务时提示 -->
     <!-- Nessun servizio disponibile -->
-    <p>No services available.</p>
+    <p>Nessun servizio disponibile.</p>
   {% endfor %}
 </div>
 

@@ -7,11 +7,11 @@
 
 <!-- 页面标题 -->
 <!-- Titolo della pagina -->
-<h2 class="mb-4">Confirm Cancellation</h2>
+<h2 class="mb-4">Conferma Cancellazione</h2>
 
 <!-- 提示取消哪一个预约 -->
 <!-- Conferma quale appuntamento cancellare -->
-<p>Cancel appointment for <strong>{{ appt.service.name }}</strong> on {{ appt.date }} at {{ appt.time }}?</p>
+<p>Annullare l'appuntamento per <strong>{{ appt.service.name }}</strong> del {{ appt.date }} alle {{ appt.time }}?</p>
 
 <!-- 确认取消表单 -->
 <!-- Modulo per confermare la cancellazione -->
@@ -19,11 +19,11 @@
   {% csrf_token %}
   <!-- 取消确认按钮 -->
   <!-- Pulsante di conferma cancellazione -->
-  <button type="submit" class="btn btn-danger">Yes, Cancel</button>
+  <button type="submit" class="btn btn-danger">Si, Cancella</button>
 
   <!-- 返回预约列表链接，样式成按钮 -->
   <!-- Link per tornare alla lista appuntamenti, stilizzato come pulsante -->
-  <a href="{% url 'appointment-list' %}" class="btn btn-secondary">No, Go Back</a>
+  <a href="{% url 'appointment-list' %}" class="btn btn-secondary">No, Torna indietro</a>
 </form>
 
 {% endblock %}

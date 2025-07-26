@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <title>Barbershop</title>
@@ -23,7 +23,7 @@
   <div class="container">
     <!-- 网站标题按钮：跳转首页 -->
     <!-- Pulsante titolo sito: reindirizza alla homepage -->
-    <a class="navbar-brand" href="{% url 'home' %}">Clover Barbershop</a>
+    <a class="navbar-brand" href="{% url 'home' %}">Clover</a>
 
     <!-- Bootstrap 折叠按钮（移动端展开菜单用） -->
     <!-- Bottone collapse di Bootstrap (per espandere il menu su dispositivi mobili) -->
@@ -41,15 +41,15 @@
         {% if user.is_authenticated %}
             {% if user.profile and user.profile.is_barber %}
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'service-list' %}">My Services</a>
+                  <a class="nav-link" href="{% url 'service-list' %}">Servizio</a>
                 </li>
             {% endif %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'appointment-list' %}">My Appointments</a>
+              <a class="nav-link" href="{% url 'appointment-list' %}">Appuntamento</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'profile' %}">My Profile</a>
+              <a class="nav-link" href="{% url 'profile' %}">Profilo</a>
             </li>
 
             <li class="nav-item">

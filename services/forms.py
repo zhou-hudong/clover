@@ -44,17 +44,17 @@ class ServiceForm(forms.ModelForm):
 class ServiceFilterForm(forms.Form):
     # 服务筛选表单 - 关键字、价格范围、时长
     # Modulo di filtro dei servizi: parola chiave, prezzo, durata
-    q = forms.CharField(required=False, label="Keyword")
+    q = forms.CharField(required=False, label="Parola chiave")
     min_price = forms.DecimalField(
-        required=False, min_value=0, decimal_places=2, label="Min Price (€)"
+        required=False, min_value=0, decimal_places=2, label="Prezzo Minimo (€)"
     )
     max_price = forms.DecimalField(
-        required=False, min_value=0, decimal_places=2, label="Max Price (€)"
+        required=False, min_value=0, decimal_places=2, label="Prezzo Massimo (€)"
     )
     duration_minutes = forms.IntegerField(
         required=False,
         min_value=0,
-        label="Duration (minutes)",
-        help_text="Enter number of minutes, e.g. 30"
+        label="Durata (minuti)",
+        help_text="Inserisci il numero di minuti, ad esempio 30"
     )
 

@@ -7,7 +7,7 @@
 
 <!-- 页面主标题 -->
 <!-- Titolo principale della pagina -->
-<h2 class="mb-4">Welcome to Barbershop!</h2>
+<h2 class="mb-4">Benvenuto al Clover!</h2>
 
 <!-- 筛选表单，使用 Bootstrap 的表单布局 -->
 <!-- Modulo di filtro, utilizzo del layout form di Bootstrap -->
@@ -43,7 +43,7 @@
   <!-- 提交按钮 -->
   <!-- Pulsante di invio -->
   <div class="col-auto">
-    <button type="submit" class="btn btn-primary">Filter</button>
+    <button type="submit" class="btn btn-primary">Filtra</button>
   </div>
 
   <!-- 重置链接 -->
@@ -73,7 +73,7 @@
       <!-- Informazioni sul servizio -->
       <div>
         <strong class="fs-5">{{ service.name }}</strong> — <span class="text-success">{{ service.price }} €</span><br>
-        <small class="text-muted">Duration: {{ service.duration|cut:":00" }}</small>
+        <small class="text-muted">Durata: {{ service.duration|cut:":00" }}</small>
 
         <p class="mt-2 mb-0">{{ service.description }}</p>
       </div>
@@ -81,7 +81,7 @@
   {% empty %}
     <!-- 当前无服务 -->
     <!-- Nessun servizio disponibile al momento -->
-    <li class="text-muted">No services available at the moment.</li>
+    <li class="text-muted">Nessun servizio disponibile al momento.</li>
   {% endfor %}
 </ul>
 

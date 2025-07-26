@@ -23,7 +23,7 @@
   <p><strong>Email:</strong> {{ profile_user.email }}</p>
 
   <!-- 描述，换行保留 -->
-  <p><strong>Description:</strong><br>{{ profile.description|linebreaksbr }}</p>
+  <p><strong>Descrizione:</strong><br>{{ profile.description|linebreaksbr }}</p>
 
   <!-- 用户角色显示 -->
   <p><strong>Role:</strong> {{ profile.is_barber|yesno:"Barber,Customer" }}</p>

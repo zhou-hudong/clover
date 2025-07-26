@@ -92,14 +92,14 @@ def appointment_create(request):
             # Crea notifica per il cliente
             Notification.objects.create(
                 recipient=request.user,
-                message=f'You successfully made an appointment on {appt.date} at {appt.time} with {appt.barber.username}.'
+                message=f'Hai fissato con successo un appuntamento il giorno {appt.date} alle ore {appt.time} con {appt.barber.username}.'
             )
 
             # 创建通知给理发师
             # Crea notifica per il barbiere
             Notification.objects.create(
                 recipient=appt.barber,
-                message=f'{request.user.username} made an appointment with you on {appt.date} at {appt.time}.'
+                message=f'{request.user.username} ho fissato un appuntamento con te il giorno {appt.date} alle ore {appt.time}.'
             )
 
             return redirect('appointment-confirm', pk=appt.pk)
@@ -156,14 +156,14 @@ def appointment_edit(request, pk):
                 # Notifica il cliente dell'aggiornamento
                 Notification.objects.create(
                     recipient=request.user,
-                    message=f'You updated your appointment to {new_appt.date} at {new_appt.time} with {new_appt.barber.username}.'
+                    message=f'Hai aggiornato il tuo appuntamento a {new_appt.date} alle {new_appt.time} con {new_appt.barber.username}.'
                 )
 
                 # 通知理发师更新
                 # Notifica il barbiere dell'aggiornamento
                 Notification.objects.create(
                     recipient=new_appt.barber,
-                    message=f'{request.user.username} updated their appointment with you to {new_appt.date} at {new_appt.time}.'
+                    message=f'{request.user.username} hanno aggiornato il loro appuntamento con te per {new_appt.date} alle {new_appt.time}.'
                 )
 
                 return redirect('appointment-edit-confirm', pk=new_appt.pk)
@@ -189,14 +189,14 @@ def appointment_delete(request, pk):
         # Notifica il cliente della cancellazione
         Notification.objects.create(
             recipient=request.user,
-            message=f'You cancelled your appointment on {appt.date} at {appt.time} with {appt.barber.username}.'
+            message=f'Hai annullato il tuo appuntamento del {appt.date} alle {appt.time} con {appt.barber.username}.'
         )
 
         # 通知理发师取消
         # Notifica il barbiere della cancellazione
         Notification.objects.create(
             recipient=appt.barber,
-            message=f'{request.user.username} cancelled their appointment with you on {appt.date} at {appt.time}.'
+            message=f'{request.user.username} hanno annullato appuntamento con te il {appt.date} alle {appt.time}.'
         )
 
         return redirect('appointment-cancelled')
